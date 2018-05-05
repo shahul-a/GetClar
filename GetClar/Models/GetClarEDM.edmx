@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GetClarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCollegeId">
+          <Key>
+            <PropertyRef Name="CollegeId_AutoId" />
+          </Key>
+          <Property Name="CollegeId_AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CollegeId_Id" Type="varchar" MaxLength="50" />
+          <Property Name="CollegeId_FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="CollegeId_LastName" Type="varchar" MaxLength="50" />
+          <Property Name="CollegeId_DOB" Type="varchar" MaxLength="50" />
+          <Property Name="CollegeId_Gender" Type="char" MaxLength="10" />
+          <Property Name="CollegeId_Email" Type="varchar" MaxLength="50" />
+          <Property Name="CollegeId_Phone" Type="varchar" MaxLength="50" />
+          <Property Name="CollegeId_Type" Type="char" MaxLength="10" />
+          <Property Name="CollegeId_IsActive" Type="bit" />
+          <Property Name="CollegeId_CreatedOn" Type="datetime" />
+          <Property Name="CollegeId_CreatedBy" Type="int" />
+          <Property Name="CollegeId_ModifiedOn" Type="datetime" />
+          <Property Name="CollegeId_ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblMemberLogin">
+          <Key>
+            <PropertyRef Name="MemberLogin_AutoId" />
+          </Key>
+          <Property Name="MemberLogin_AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberLogin_MemberId" Type="int" Nullable="false" />
+          <Property Name="MemberLogin_Username" Type="varchar" MaxLength="50" />
+          <Property Name="MemberLogin_Password" Type="varchar" MaxLength="50" />
+          <Property Name="MemberLogin_IsActive" Type="bit" />
+          <Property Name="MemberLogin_CreatedOn" Type="datetime" />
+          <Property Name="MemberLogin_CreatedBy" Type="int" />
+          <Property Name="MemberLogin_ModifiedOn" Type="datetime" />
+          <Property Name="MemberLogin_ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblMembers">
+          <Key>
+            <PropertyRef Name="Member_AutoId" />
+          </Key>
+          <Property Name="Member_AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member_Firstname" Type="varchar" MaxLength="50" />
+          <Property Name="Member_Lastname" Type="varchar" MaxLength="50" />
+          <Property Name="Member_DOB" Type="date" />
+          <Property Name="Member_Gender" Type="char" MaxLength="10" />
+          <Property Name="Member_CollegeId" Type="varchar" MaxLength="50" />
+          <Property Name="Member_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Member_Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Member_Type" Type="char" MaxLength="10" />
+          <Property Name="Member_StaffCategory" Type="char" MaxLength="10" />
+          <Property Name="Member_Specialization" Type="int" />
+          <Property Name="Member_CreatedOn" Type="datetime" />
+          <Property Name="Member_CreatedBy" Type="int" />
+          <Property Name="Member_ModifiedOn" Type="datetime" />
+          <Property Name="Member_ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSpecialization">
+          <Key>
+            <PropertyRef Name="Specialization_AutoId" />
+          </Key>
+          <Property Name="Specialization_AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Specialization_Area" Type="varchar" MaxLength="100" />
+          <Property Name="Specialization_Category" Type="varchar" MaxLength="50" />
+          <Property Name="Specialization_CreatedOn" Type="datetime" />
+          <Property Name="Specialization_CreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblStaffSpecialization">
+          <Key>
+            <PropertyRef Name="StaffSpecialization_AutoId" />
+          </Key>
+          <Property Name="StaffSpecialization_AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StaffSpecialization_StaffId" Type="int" Nullable="false" />
+          <Property Name="StaffSpecialization_SpecializationId" Type="int" Nullable="false" />
+          <Property Name="StaffSpecialization_CreatedOn" Type="datetime" />
+          <Property Name="StaffSpecialization_CreatedBy" Type="int" />
+        </EntityType>
+        <Association Name="FK_tblMemberLogin_tblMembers">
+          <End Role="tblMembers" Type="Self.tblMembers" Multiplicity="1" />
+          <End Role="tblMemberLogin" Type="Self.tblMemberLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMembers">
+              <PropertyRef Name="Member_AutoId" />
+            </Principal>
+            <Dependent Role="tblMemberLogin">
+              <PropertyRef Name="MemberLogin_MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStaffSpecialization_tblMembers">
+          <End Role="tblMembers" Type="Self.tblMembers" Multiplicity="1" />
+          <End Role="tblStaffSpecialization" Type="Self.tblStaffSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMembers">
+              <PropertyRef Name="Member_AutoId" />
+            </Principal>
+            <Dependent Role="tblStaffSpecialization">
+              <PropertyRef Name="StaffSpecialization_StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStaffSpecialization_tblSpecialization">
+          <End Role="tblSpecialization" Type="Self.tblSpecialization" Multiplicity="1" />
+          <End Role="tblStaffSpecialization" Type="Self.tblStaffSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSpecialization">
+              <PropertyRef Name="Specialization_AutoId" />
+            </Principal>
+            <Dependent Role="tblStaffSpecialization">
+              <PropertyRef Name="StaffSpecialization_SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GetClarModelStoreContainer">
+          <EntitySet Name="tblCollegeId" EntityType="Self.tblCollegeId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMemberLogin" EntityType="Self.tblMemberLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMembers" EntityType="Self.tblMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSpecialization" EntityType="Self.tblSpecialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStaffSpecialization" EntityType="Self.tblStaffSpecialization" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblMemberLogin_tblMembers" Association="Self.FK_tblMemberLogin_tblMembers">
+            <End Role="tblMembers" EntitySet="tblMembers" />
+            <End Role="tblMemberLogin" EntitySet="tblMemberLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStaffSpecialization_tblMembers" Association="Self.FK_tblStaffSpecialization_tblMembers">
+            <End Role="tblMembers" EntitySet="tblMembers" />
+            <End Role="tblStaffSpecialization" EntitySet="tblStaffSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStaffSpecialization_tblSpecialization" Association="Self.FK_tblStaffSpecialization_tblSpecialization">
+            <End Role="tblSpecialization" EntitySet="tblSpecialization" />
+            <End Role="tblStaffSpecialization" EntitySet="tblStaffSpecialization" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GetClarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CollegeId">
+          <Key>
+            <PropertyRef Name="CollegeId_AutoId" />
+          </Key>
+          <Property Name="CollegeId_AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollegeId_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeId_FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeId_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeId_DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeId_Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="CollegeId_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeId_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeId_Type" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="CollegeId_IsActive" Type="Boolean" />
+          <Property Name="CollegeId_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CollegeId_CreatedBy" Type="Int32" />
+          <Property Name="CollegeId_ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="CollegeId_ModifiedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MemberLogin">
+          <Key>
+            <PropertyRef Name="MemberLogin_AutoId" />
+          </Key>
+          <Property Name="MemberLogin_AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberLogin_MemberId" Type="Int32" Nullable="false" />
+          <Property Name="MemberLogin_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MemberLogin_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MemberLogin_IsActive" Type="Boolean" />
+          <Property Name="MemberLogin_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="MemberLogin_CreatedBy" Type="Int32" />
+          <Property Name="MemberLogin_ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="MemberLogin_ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_tblMemberLogin_tblMembers" FromRole="tblMemberLogin" ToRole="tblMembers" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="Member_AutoId" />
+          </Key>
+          <Property Name="Member_AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member_Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Member_Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Member_DOB" Type="DateTime" Precision="0" />
+          <Property Name="Member_Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Member_CollegeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Member_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Member_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Member_Type" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Member_StaffCategory" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Member_Specialization" Type="Int32" />
+          <Property Name="Member_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Member_CreatedBy" Type="Int32" />
+          <Property Name="Member_ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="Member_ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="MemberLogins" Relationship="Self.FK_tblMemberLogin_tblMembers" FromRole="tblMembers" ToRole="tblMemberLogin" />
+          <NavigationProperty Name="StaffSpecializations" Relationship="GetClarModel.FK_tblStaffSpecialization_tblMembers" FromRole="Member" ToRole="tblStaffSpecialization" />
+        </EntityType>
+        <Association Name="FK_tblMemberLogin_tblMembers">
+          <End Role="tblMembers" Type="GetClarModel.Member" Multiplicity="1" />
+          <End Role="tblMemberLogin" Type="GetClarModel.MemberLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMembers">
+              <PropertyRef Name="Member_AutoId" />
+            </Principal>
+            <Dependent Role="tblMemberLogin">
+              <PropertyRef Name="MemberLogin_MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GetClarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CollegeIds" EntityType="GetClarModel.CollegeId" />
+          <EntitySet Name="MemberLogins" EntityType="GetClarModel.MemberLogin" />
+          <EntitySet Name="Members" EntityType="GetClarModel.Member" />
+          <AssociationSet Name="FK_tblMemberLogin_tblMembers" Association="Self.FK_tblMemberLogin_tblMembers">
+            <End Role="tblMembers" EntitySet="Members" />
+            <End Role="tblMemberLogin" EntitySet="MemberLogins" />
+          </AssociationSet>
+          <EntitySet Name="Specializations" EntityType="GetClarModel.Specialization" />
+          <EntitySet Name="StaffSpecializations" EntityType="GetClarModel.StaffSpecialization" />
+          <AssociationSet Name="FK_tblStaffSpecialization_tblMembers" Association="GetClarModel.FK_tblStaffSpecialization_tblMembers">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="tblStaffSpecialization" EntitySet="StaffSpecializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblStaffSpecialization_tblSpecialization" Association="GetClarModel.FK_tblStaffSpecialization_tblSpecialization">
+            <End Role="tblSpecialization" EntitySet="Specializations" />
+            <End Role="tblStaffSpecialization" EntitySet="StaffSpecializations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Specialization_AutoId" />
+          </Key>
+          <Property Name="Specialization_AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Specialization_Area" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Specialization_Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Specialization_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Specialization_CreatedBy" Type="Int32" />
+          <NavigationProperty Name="StaffSpecializations" Relationship="GetClarModel.FK_tblStaffSpecialization_tblSpecialization" FromRole="tblSpecialization" ToRole="tblStaffSpecialization" />
+        </EntityType>
+        <EntityType Name="StaffSpecialization">
+          <Key>
+            <PropertyRef Name="StaffSpecialization_AutoId" />
+          </Key>
+          <Property Name="StaffSpecialization_AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StaffSpecialization_StaffId" Type="Int32" Nullable="false" />
+          <Property Name="StaffSpecialization_SpecializationId" Type="Int32" Nullable="false" />
+          <Property Name="StaffSpecialization_CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="StaffSpecialization_CreatedBy" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="GetClarModel.FK_tblStaffSpecialization_tblMembers" FromRole="tblStaffSpecialization" ToRole="Member" />
+          <NavigationProperty Name="Specialization" Relationship="GetClarModel.FK_tblStaffSpecialization_tblSpecialization" FromRole="tblStaffSpecialization" ToRole="tblSpecialization" />
+        </EntityType>
+        <Association Name="FK_tblStaffSpecialization_tblMembers">
+          <End Type="GetClarModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="GetClarModel.StaffSpecialization" Role="tblStaffSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="Member_AutoId" />
+            </Principal>
+            <Dependent Role="tblStaffSpecialization">
+              <PropertyRef Name="StaffSpecialization_StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblStaffSpecialization_tblSpecialization">
+          <End Type="GetClarModel.Specialization" Role="tblSpecialization" Multiplicity="1" />
+          <End Type="GetClarModel.StaffSpecialization" Role="tblStaffSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSpecialization">
+              <PropertyRef Name="Specialization_AutoId" />
+            </Principal>
+            <Dependent Role="tblStaffSpecialization">
+              <PropertyRef Name="StaffSpecialization_SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GetClarModelStoreContainer" CdmEntityContainer="GetClarEntities">
+          <EntitySetMapping Name="CollegeIds">
+            <EntityTypeMapping TypeName="GetClarModel.CollegeId">
+              <MappingFragment StoreEntitySet="tblCollegeId">
+                <ScalarProperty Name="CollegeId_AutoId" ColumnName="CollegeId_AutoId" />
+                <ScalarProperty Name="CollegeId_Id" ColumnName="CollegeId_Id" />
+                <ScalarProperty Name="CollegeId_FirstName" ColumnName="CollegeId_FirstName" />
+                <ScalarProperty Name="CollegeId_LastName" ColumnName="CollegeId_LastName" />
+                <ScalarProperty Name="CollegeId_DOB" ColumnName="CollegeId_DOB" />
+                <ScalarProperty Name="CollegeId_Gender" ColumnName="CollegeId_Gender" />
+                <ScalarProperty Name="CollegeId_Email" ColumnName="CollegeId_Email" />
+                <ScalarProperty Name="CollegeId_Phone" ColumnName="CollegeId_Phone" />
+                <ScalarProperty Name="CollegeId_Type" ColumnName="CollegeId_Type" />
+                <ScalarProperty Name="CollegeId_IsActive" ColumnName="CollegeId_IsActive" />
+                <ScalarProperty Name="CollegeId_CreatedOn" ColumnName="CollegeId_CreatedOn" />
+                <ScalarProperty Name="CollegeId_CreatedBy" ColumnName="CollegeId_CreatedBy" />
+                <ScalarProperty Name="CollegeId_ModifiedOn" ColumnName="CollegeId_ModifiedOn" />
+                <ScalarProperty Name="CollegeId_ModifiedBy" ColumnName="CollegeId_ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberLogins">
+            <EntityTypeMapping TypeName="GetClarModel.MemberLogin">
+              <MappingFragment StoreEntitySet="tblMemberLogin">
+                <ScalarProperty Name="MemberLogin_AutoId" ColumnName="MemberLogin_AutoId" />
+                <ScalarProperty Name="MemberLogin_MemberId" ColumnName="MemberLogin_MemberId" />
+                <ScalarProperty Name="MemberLogin_Username" ColumnName="MemberLogin_Username" />
+                <ScalarProperty Name="MemberLogin_Password" ColumnName="MemberLogin_Password" />
+                <ScalarProperty Name="MemberLogin_IsActive" ColumnName="MemberLogin_IsActive" />
+                <ScalarProperty Name="MemberLogin_CreatedOn" ColumnName="MemberLogin_CreatedOn" />
+                <ScalarProperty Name="MemberLogin_CreatedBy" ColumnName="MemberLogin_CreatedBy" />
+                <ScalarProperty Name="MemberLogin_ModifiedOn" ColumnName="MemberLogin_ModifiedOn" />
+                <ScalarProperty Name="MemberLogin_ModifiedBy" ColumnName="MemberLogin_ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="GetClarModel.Member">
+              <MappingFragment StoreEntitySet="tblMembers">
+                <ScalarProperty Name="Member_AutoId" ColumnName="Member_AutoId" />
+                <ScalarProperty Name="Member_Firstname" ColumnName="Member_Firstname" />
+                <ScalarProperty Name="Member_Lastname" ColumnName="Member_Lastname" />
+                <ScalarProperty Name="Member_DOB" ColumnName="Member_DOB" />
+                <ScalarProperty Name="Member_Gender" ColumnName="Member_Gender" />
+                <ScalarProperty Name="Member_CollegeId" ColumnName="Member_CollegeId" />
+                <ScalarProperty Name="Member_Email" ColumnName="Member_Email" />
+                <ScalarProperty Name="Member_Phone" ColumnName="Member_Phone" />
+                <ScalarProperty Name="Member_Type" ColumnName="Member_Type" />
+                <ScalarProperty Name="Member_StaffCategory" ColumnName="Member_StaffCategory" />
+                <ScalarProperty Name="Member_Specialization" ColumnName="Member_Specialization" />
+                <ScalarProperty Name="Member_CreatedOn" ColumnName="Member_CreatedOn" />
+                <ScalarProperty Name="Member_CreatedBy" ColumnName="Member_CreatedBy" />
+                <ScalarProperty Name="Member_ModifiedOn" ColumnName="Member_ModifiedOn" />
+                <ScalarProperty Name="Member_ModifiedBy" ColumnName="Member_ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specializations">
+            <EntityTypeMapping TypeName="GetClarModel.Specialization">
+              <MappingFragment StoreEntitySet="tblSpecialization">
+                <ScalarProperty Name="Specialization_CreatedBy" ColumnName="Specialization_CreatedBy" />
+                <ScalarProperty Name="Specialization_CreatedOn" ColumnName="Specialization_CreatedOn" />
+                <ScalarProperty Name="Specialization_Category" ColumnName="Specialization_Category" />
+                <ScalarProperty Name="Specialization_Area" ColumnName="Specialization_Area" />
+                <ScalarProperty Name="Specialization_AutoId" ColumnName="Specialization_AutoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffSpecializations">
+            <EntityTypeMapping TypeName="GetClarModel.StaffSpecialization">
+              <MappingFragment StoreEntitySet="tblStaffSpecialization">
+                <ScalarProperty Name="StaffSpecialization_CreatedBy" ColumnName="StaffSpecialization_CreatedBy" />
+                <ScalarProperty Name="StaffSpecialization_CreatedOn" ColumnName="StaffSpecialization_CreatedOn" />
+                <ScalarProperty Name="StaffSpecialization_SpecializationId" ColumnName="StaffSpecialization_SpecializationId" />
+                <ScalarProperty Name="StaffSpecialization_StaffId" ColumnName="StaffSpecialization_StaffId" />
+                <ScalarProperty Name="StaffSpecialization_AutoId" ColumnName="StaffSpecialization_AutoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
