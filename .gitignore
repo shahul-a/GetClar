@@ -2,6 +2,9 @@
 /packages
 GetClar.sln
 GitRemote.txt
+GetClar/bin
+GetClar/obj
+
 
 
 
