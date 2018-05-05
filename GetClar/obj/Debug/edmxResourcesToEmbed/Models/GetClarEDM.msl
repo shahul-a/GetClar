@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GetClarModelStoreContainer" CdmEntityContainer="GetClarEntities">
+    <EntitySetMapping Name="CollegeIds">
+      <EntityTypeMapping TypeName="GetClarModel.CollegeId">
+        <MappingFragment StoreEntitySet="tblCollegeId">
+          <ScalarProperty Name="CollegeId_AutoId" ColumnName="CollegeId_AutoId" />
+          <ScalarProperty Name="CollegeId_Id" ColumnName="CollegeId_Id" />
+          <ScalarProperty Name="CollegeId_FirstName" ColumnName="CollegeId_FirstName" />
+          <ScalarProperty Name="CollegeId_LastName" ColumnName="CollegeId_LastName" />
+          <ScalarProperty Name="CollegeId_DOB" ColumnName="CollegeId_DOB" />
+          <ScalarProperty Name="CollegeId_Gender" ColumnName="CollegeId_Gender" />
+          <ScalarProperty Name="CollegeId_Email" ColumnName="CollegeId_Email" />
+          <ScalarProperty Name="CollegeId_Phone" ColumnName="CollegeId_Phone" />
+          <ScalarProperty Name="CollegeId_Type" ColumnName="CollegeId_Type" />
+          <ScalarProperty Name="CollegeId_IsActive" ColumnName="CollegeId_IsActive" />
+          <ScalarProperty Name="CollegeId_CreatedOn" ColumnName="CollegeId_CreatedOn" />
+          <ScalarProperty Name="CollegeId_CreatedBy" ColumnName="CollegeId_CreatedBy" />
+          <ScalarProperty Name="CollegeId_ModifiedOn" ColumnName="CollegeId_ModifiedOn" />
+          <ScalarProperty Name="CollegeId_ModifiedBy" ColumnName="CollegeId_ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberLogins">
+      <EntityTypeMapping TypeName="GetClarModel.MemberLogin">
+        <MappingFragment StoreEntitySet="tblMemberLogin">
+          <ScalarProperty Name="MemberLogin_AutoId" ColumnName="MemberLogin_AutoId" />
+          <ScalarProperty Name="MemberLogin_MemberId" ColumnName="MemberLogin_MemberId" />
+          <ScalarProperty Name="MemberLogin_Username" ColumnName="MemberLogin_Username" />
+          <ScalarProperty Name="MemberLogin_Password" ColumnName="MemberLogin_Password" />
+          <ScalarProperty Name="MemberLogin_IsActive" ColumnName="MemberLogin_IsActive" />
+          <ScalarProperty Name="MemberLogin_CreatedOn" ColumnName="MemberLogin_CreatedOn" />
+          <ScalarProperty Name="MemberLogin_CreatedBy" ColumnName="MemberLogin_CreatedBy" />
+          <ScalarProperty Name="MemberLogin_ModifiedOn" ColumnName="MemberLogin_ModifiedOn" />
+          <ScalarProperty Name="MemberLogin_ModifiedBy" ColumnName="MemberLogin_ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="GetClarModel.Member">
+        <MappingFragment StoreEntitySet="tblMembers">
+          <ScalarProperty Name="Member_AutoId" ColumnName="Member_AutoId" />
+          <ScalarProperty Name="Member_Firstname" ColumnName="Member_Firstname" />
+          <ScalarProperty Name="Member_Lastname" ColumnName="Member_Lastname" />
+          <ScalarProperty Name="Member_DOB" ColumnName="Member_DOB" />
+          <ScalarProperty Name="Member_Gender" ColumnName="Member_Gender" />
+          <ScalarProperty Name="Member_CollegeId" ColumnName="Member_CollegeId" />
+          <ScalarProperty Name="Member_Email" ColumnName="Member_Email" />
+          <ScalarProperty Name="Member_Phone" ColumnName="Member_Phone" />
+          <ScalarProperty Name="Member_Type" ColumnName="Member_Type" />
+          <ScalarProperty Name="Member_StaffCategory" ColumnName="Member_StaffCategory" />
+          <ScalarProperty Name="Member_Specialization" ColumnName="Member_Specialization" />
+          <ScalarProperty Name="Member_CreatedOn" ColumnName="Member_CreatedOn" />
+          <ScalarProperty Name="Member_CreatedBy" ColumnName="Member_CreatedBy" />
+          <ScalarProperty Name="Member_ModifiedOn" ColumnName="Member_ModifiedOn" />
+          <ScalarProperty Name="Member_ModifiedBy" ColumnName="Member_ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specializations">
+      <EntityTypeMapping TypeName="GetClarModel.Specialization">
+        <MappingFragment StoreEntitySet="tblSpecialization">
+          <ScalarProperty Name="Specialization_CreatedBy" ColumnName="Specialization_CreatedBy" />
+          <ScalarProperty Name="Specialization_CreatedOn" ColumnName="Specialization_CreatedOn" />
+          <ScalarProperty Name="Specialization_Category" ColumnName="Specialization_Category" />
+          <ScalarProperty Name="Specialization_Area" ColumnName="Specialization_Area" />
+          <ScalarProperty Name="Specialization_AutoId" ColumnName="Specialization_AutoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StaffSpecializations">
+      <EntityTypeMapping TypeName="GetClarModel.StaffSpecialization">
+        <MappingFragment StoreEntitySet="tblStaffSpecialization">
+          <ScalarProperty Name="StaffSpecialization_CreatedBy" ColumnName="StaffSpecialization_CreatedBy" />
+          <ScalarProperty Name="StaffSpecialization_CreatedOn" ColumnName="StaffSpecialization_CreatedOn" />
+          <ScalarProperty Name="StaffSpecialization_SpecializationId" ColumnName="StaffSpecialization_SpecializationId" />
+          <ScalarProperty Name="StaffSpecialization_StaffId" ColumnName="StaffSpecialization_StaffId" />
+          <ScalarProperty Name="StaffSpecialization_AutoId" ColumnName="StaffSpecialization_AutoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

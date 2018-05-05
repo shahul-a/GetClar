@@ -1,0 +1,142 @@
+﻿@model GetClar.Models.Member
+
+@{
+    ViewBag.Title = "Account";
+}
+
+<h2>Account Creation</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Member_Firstname)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Member_Firstname)
+            </td>
+
+            <td>
+                @Html.LabelFor(model => model.Member_Lastname)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Member_Lastname)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Member_DOB)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Member_DOB)
+            </td>
+
+            <td>
+                @Html.LabelFor(model => model.Member_Gender)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.DropDownList("Gender", new List<SelectListItem> {
+           new SelectListItem{ Text="Female",Value="F"},new SelectListItem{ Text="Male",Value="M"} }, "-- Select --")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Member_CollegeId)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Member_CollegeId)
+            </td>
+
+            <td>
+                @Html.LabelFor(model => model.Member_Email)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Member_Email)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Member_Phone)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Member_Phone)
+            </td>
+
+            <td>
+                @Html.LabelFor(model => model.Member_Type)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.DropDownList("Type", new List<SelectListItem> { new SelectListItem { Text = "Student",Value="ST"},
+               new SelectListItem { Text = "Professor", Value = "PRO" } }, "-- Select --")
+            </td>
+
+        </tr>
+
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Member_Specialization)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.DropDownList("Specialization", new SelectList(ViewBag.Specialization, "Specialization_AutoId", "Specialization_Area"))
+            </td>
+
+            <td>
+                @Html.LabelFor(model => model.Member_StaffCategory)
+            </td>
+            <td style="width:10px">
+                :
+            </td>
+            <td>
+                @Html.DropDownList("Staffcategory", new List<SelectListItem> { new SelectListItem { Text = "Academic",Value="AC"},
+               new SelectListItem { Text = "Non-Academic", Value = "NAC" } }, "-- Select --")
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <input type="button" value="Create" name="create" />
+                @Html.ActionLink("Back to Login", "Login")
+            </td>
+            
+                
+            
+        </tr>
+    </table>
+
+
+}
+
